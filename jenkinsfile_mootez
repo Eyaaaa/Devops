@@ -48,7 +48,7 @@ pipeline{
 	        stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t absnader/springprojet .'
+                    sh 'docker build -t mootezchachia/springprojet .'
                 }
             }
         }
@@ -56,10 +56,10 @@ pipeline{
             steps{
                 script{
 		withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-                   sh 'docker login -u absnader -p $dockerhubpwd docker.io'
+                   sh 'docker login -u mootezchachia -p $dockerhubpwd docker.io'
 }
 
-                   sh 'docker push absnader/springprojet:latest'
+                   sh 'docker push mootezchachia/springprojet:latest'
                 }
             }
         }*/
