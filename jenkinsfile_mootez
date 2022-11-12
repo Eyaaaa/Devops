@@ -9,7 +9,7 @@ pipeline{
         
         stages{
 
-/*
+
                             stage('Test unitaires + mock') {
                               steps {
                                script {
@@ -62,14 +62,8 @@ pipeline{
                    sh 'docker push mootezchachia/springprojet:latest'
                 }
             }
-        }*/
-	stage('Jenkins mail Notification'){
-            steps{
-                
-                    emailext attachLog: true, body: 'This mail is from Jenkins, please check your logs', subject: 'Jenkins Notification', to: 'nader.abbassi@esprit.tn'
-                }
-            
         }
+
 
 }
 }
