@@ -55,7 +55,7 @@ public class OperateurServiceMockitoImpTest {
     @Test
     public void testAddOperateur() {
 
-        Operateur operateur = new Operateur("mohamed","hedi","loool");
+        Operateur operateur = new Operateur("test","test","test");
 
         Mockito.when(this.cp.save(Mockito.any())).thenReturn(operateur);
         Operateur savedOperateur = rs.addOperateur(operateur);
