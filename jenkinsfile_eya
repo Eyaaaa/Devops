@@ -21,7 +21,7 @@ pipeline{
 
                             }
 
-               stage('sonnarqube(qualite de code'){
+               stage('SONNAR'){
                   steps{
                       script{
 			      withSonarQubeEnv('sonar') {
