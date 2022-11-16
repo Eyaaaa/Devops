@@ -3,7 +3,7 @@ pipeline{
       agent any
         tools {
      jdk 'JAVA_HOME'
-     maven '$M2_HOME'
+     maven 'M2_HOME'
   }
      
         
@@ -48,7 +48,7 @@ pipeline{
 	        stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t adamhnich/springprojet .'
+                    sh 'docker build -t eyayousfi/springprojet .'
                 }
             }
         }
@@ -56,10 +56,10 @@ pipeline{
             steps{
                 script{
 		withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-                   sh 'docker login -u adamhnich -p $dockerhubpwd docker.io'
+                   sh 'docker login -u eyayousfi -p $dockerhubpwd docker.io'
 }
 
-                   sh 'docker push adamhnich/springprojet:latest'
+                   sh 'docker push eyayousfi/springprojet:latest'
                 }
             }
         }
