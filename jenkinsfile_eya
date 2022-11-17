@@ -10,10 +10,10 @@ pipeline{
         stages{
 
 
-                            stage('Test unitaires + mock') {
+                            stage('Tests (mock + unitaires) ') {
                               steps {
                                script {
-                                sh 'echo "Test is processing ...."'
+                                
                                 sh 'mvn clean test'
                                }
 
