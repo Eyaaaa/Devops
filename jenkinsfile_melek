@@ -1,0 +1,76 @@
+pipeline{
+
+      agent any
+        tools {
+     jdk 'JAVA_HOME' 
+     maven 'M2_HOME'
+  }
+     
+        
+        stages{  
+
+
+                            stage('testing(JUnit and Mock)') {
+                              steps {
+                               script {
+                                sh 'echo "Test is processing ...."'
+                                sh 'mvn clean test'
+                               }
+
+                              }
+
+                            }
+
+               stage('qualité de code Sonarqube'){
+                  steps{
+                      script{
+			      withSonarQubeEnv('sonar') {
+			      sh "mvn compile sonar:sonar"
+                       	     	}
+			      timeout(time: 1, unit: 'HOURS') {
+			      def qg = waitForQualityGate()
+				      if (qg.status != 'OK') {
+					   error "Pipeline aborted due to quality gate failure: ${qg.status}"
+				      }
+                    		}
+		    	    sh "mvn clean install"
+
+                 	}
+               	 }
+              }
+		stage("build jar") {
+            steps {
+                script {
+                    sh "mvn package -DskipTests=true"
+                }
+            }
+        }
+	        stage('Docker Image'){
+            steps{
+                script{
+                    sh 'docker build -t melek111/springprojet .'
+                }
+            }
+        }
+	        stage('Pushing to DockerHub'){
+            steps{
+                script{
+		withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
+                   sh 'docker login -u melek111 -p $dockerhubpwd docker.io'
+}
+
+                   sh 'docker push melek111/springprojet:latest'
+                }
+            }
+        }
+
+	stage('docker compose'){
+            steps{
+                
+                   sh 'docker-compose up -d'
+                }
+            
+        }
+
+}
+}
