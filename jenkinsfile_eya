@@ -8,7 +8,19 @@ pipeline{
      
         
         
-	
+stages{
+
+
+                        stage('Tests (mock + unitaires) ') {
+                    steps {
+                        script {
+                                
+                                sh 'mvn clean test'
+                     }
+
+                   }
+
+                }
 	
 	
 	
