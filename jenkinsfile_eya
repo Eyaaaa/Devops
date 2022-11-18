@@ -57,24 +57,15 @@ stages{
                 }
             }
         }
-	        stage('Push image to Hub'){
-            steps{
-                script{
-		withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-                   sh 'docker login -u eyayousfi -p $dockerhubpwd docker.io'
-}
-
-                   sh 'docker push eyayousfi/springprojet:latest' 
-                }
-            }
-        }
-		        stage('Docker Compose'){
-            steps{
-                script{
-                    sh 'docker-compose up -d'
-                }
-            }
-        }
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
+	       
  
 }
 }
