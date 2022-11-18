@@ -59,7 +59,7 @@ pipeline{
                    sh 'docker login -u eyayousfi -p $dockerhubpwd docker.io'
 }
 
-                   sh 'docker push eyayousfi/springprojet:latest'
+                   sh 'docker push eyayousfi/springprojet:latest' 
                 }
             }
         }
